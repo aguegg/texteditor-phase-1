@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload and Process Image</title>
+    <center><h1>Text Editor</h1></center>
+    <style>
+        /* Main container with flex layout */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Left and right sections */
+        .left-section, .right-section {
+            width: 45%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* Style for midline */
+        .midline {
+            width: 1px;
+            background-color: gray;
+            height: 100%;
+        }
+        
+        /* Button and form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        button {
+            margin: 10px 0;
+        }
+
+        /* Textarea styling */
+        textarea {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <center><h2>Remove the Text in the image</h2></center> <br><br>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" accept="image/*" required> <br>
+                <input type="submit" name="process" value="Upload and Preview the Text removed image">
+                <br>
+                <center>
+                    <a href="/download_image">
+                        <button type="button">Download Text Removed Image</button>
+                    </a>
+                </center>
+                <!-- <button type="submit" formaction="/download_image">Download Image</button> -->
+                <h3>Extracted Text:</h3>
+            <button type="submit" formaction="/extract_text" name="extract" value="Extract Text">Extract Text</button>
+            <textarea id="extractedText" name="extracted_text" rows="10" cols="50" readonly>{{ extracted_text }}</textarea>
+
+            </form>
+        </div>
+
+        <!-- Midline Divider -->
+        <div class="midline"></div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <center><h2>Replace the Text in the image</h2></center> <br><br>
+            <!-- <h3>Extracted Text:</h3>
+            <button type="submit" formaction="/extract_text" name="extract" value="Extract Text">Extract Text</button>
+            <textarea id="extractedText" name="extracted_text" rows="10" cols="50" readonly>{{ extracted_text }}</textarea> -->
+
+            <h3>Edit Text:</h3>
+            <form action="/edit_text" method="post">
+                <textarea id="editTextBox" name="edited_text" rows="10" cols="50">{{ extracted_text }}</textarea>
+                <br>
+                <button type="submit" name="magic_text" value="Magic Text Editor">Preview the edited text in the text removed image</button>
+                <center>
+                    <a href="/download_edited_image">
+                        <button type="button">Download Text Edited Image</button>
+                    </a>
+                </center>
+                <!-- <button type="submit" formaction="/download_edited_image">Download Edited Image</button> -->
+            </form>
+        </div>
+    </div>
+</body>
+</html>
